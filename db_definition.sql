@@ -76,3 +76,61 @@ using(
     and diary_entries.user_id = auth.uid()
   )
 );
+
+alter table public.diary_items
+add column logmeal_id text;
+
+alter table public.diary_entries
+add column if not exists image_url text;
+
+create policy "Users can upload their own meal images"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = 'meal-images'
+  and (storage.foldername(name))[1] = auth.uid()::text
+);
+
+create policy "Users can view their own meal images"
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = 'meal-images'
+  and (storage.foldername(name))[1] = auth.uid()::text
+);
+
+create table if not exists public.profiles (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  age integer,
+  sex text,
+  weight_kg numeric(6,2),
+  height_cm numeric(6,2),
+  goal text,
+  dietary_preference text,
+  activity_level text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.profiles enable row level security;
+
+create policy "Users can view their own profile"
+on public.profiles
+for select
+to authenticated
+using (auth.uid() = user_id);
+
+create policy "Users can create their own profile"
+on public.profiles
+for insert
+to authenticated
+with check (auth.uid() = user_id);
+
+create policy "Users can update their own profile"
+on public.profiles
+for update
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);

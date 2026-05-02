@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 export default function LoginPage() {
     const router = useRouter()
@@ -42,19 +44,17 @@ export default function LoginPage() {
                     <p className="text-gray-600">Welcome back to your food diary</p>
                 </div>
 
-                <input
+                <Input
                     type="email"
                     placeholder="Email"
-                    className="w-full rounded-lg border px-4 py-3"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
 
-                <input
+                <Input
                     type="password"
                     placeholder="Password"
-                    className="w-full rounded-lg border px-4 py-3"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -62,13 +62,14 @@ export default function LoginPage() {
 
                 {error && <p className="text-sm text-red-600">{error}</p>}
 
-                <button
+                <Button
                     type="submit"
-                    className="w-full rounded-lg bg-black px-4 py-3 text-white disabled:opacity-50"
                     disabled={loading}
+                    className="w-full"
+                    size="lg"
                 >
                     {loading ? "Logging in..." : "Log in"}
-                </button>
+                </Button>
 
                 <p className="text-center text-sm">
                     No account?{" "}

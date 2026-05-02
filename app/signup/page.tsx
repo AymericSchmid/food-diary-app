@@ -4,6 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 export default function SignupPage() {
     const router = useRouter()
@@ -42,19 +44,17 @@ export default function SignupPage() {
                     <p className="text-gray-600">Start your food diary</p>
                 </div>
 
-                <input 
-                    type="email"
-                    placeholder="Email"
-                    className="w-full rounded-lg border px-4 py-3"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                <Input 
+                    type="email" 
+                    placeholder="Email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    required 
                 />
 
-                <input
+                <Input
                     type="password"
                     placeholder="Password"
-                    className="w-full rounded-lg border px-4 py-3"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -62,13 +62,14 @@ export default function SignupPage() {
 
                 {error && <p className="text-sm text-red-500">{error}</p>}
 
-                <button
-                    type="submit"
+                <Button
+                    variant="default"
                     disabled={loading}
-                    className="w-full rounded-lg bg-black px-4 py-3 text-white disabled:opacity-50"
+                    className="w-full"
+                    size="lg"
                 >
                     {loading ? "Creating account..." : "Create account"}
-                </button>
+                </Button>
 
                 <p className="text-center text-sm">
                     Already have an account?{" "}
