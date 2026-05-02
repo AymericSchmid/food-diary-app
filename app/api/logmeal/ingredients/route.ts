@@ -7,6 +7,7 @@ export async function GET() {
     const token = process.env.LOGMEAL_API_TOKEN
 
     try {
+        // ingredients are mostly static, so a day-long cache keeps the search box snappy without hitting LogMeal every time
         const response = await fetch(LOGMEAL_INGREDIENTS_URL, {
             method: "GET",
             headers: {

@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const token = process.env.LOGMEAL_API_TOKEN
 
     try {
+        // this route intentionally passes the payload through unchanged because the client already builds the LogMeal shape
         const body = await request.json()
 
         const response = await fetch(LOGMEAL_CONFIRM_DISH_URL, {

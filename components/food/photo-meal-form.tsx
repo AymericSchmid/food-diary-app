@@ -125,8 +125,9 @@ export default function PhotoMealForm() {
         setError("")
 
         try {
-            // ensure the selected foods are in the correct order based on their position
-            const selectedEntries = Object.entries(selectedFoods).sort(([a], [b]) => Number(a[0]) - Number(b))
+            // LogMeal numbers segments from 1, while our local map is keyed from 0
+            // sorting here keeps the confirm payload aligned with the original image order
+            const selectedEntries = Object.entries(selectedFoods).sort(([a], [b]) => Number(a) - Number(b))
 
             const confirmResponse = await fetch("/api/logmeal/confirm-dish", {
                 method: "POST",

@@ -17,6 +17,7 @@ export function buildPhotoNutritionItems(
 ): PhotoNutritionItem[] {
     return data.nutritional_info_per_item
         .filter((item: any) => {
+            // food_item_position is 1-based in the API response, but selectedFoods uses 0-based keys
             const segmentIndex = item.food_item_position - 1
             return Boolean(selectedFoods[segmentIndex])
         })
@@ -24,6 +25,7 @@ export function buildPhotoNutritionItems(
             const segmentIndex = item.food_item_position - 1
             const selectedFood = selectedFoods[segmentIndex]
 
+            // keep the user-facing name stable even when LogMeal returns a generic fallback label
             const name = selectedFood?.name ?? data.foodName?.[segmentIndex] ?? `Food item ${item.food_item_position}`
 
             const serving = Number(item.serving_size ?? 0)
@@ -42,5 +44,6 @@ export function buildPhotoNutritionItems(
 }
 
 export function adjustedKcal(item: PhotoNutritionItem) {
+    // scale the API's base calories to the serving size the user actually kept.
     return (item.baseKcal / item.baseServing) * item.serving
 }

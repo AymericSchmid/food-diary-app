@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const token = process.env.LOGMEAL_API_TOKEN
 
     try {
+        // the browser sends the raw file to this route; the server forwards it so the API token never leaves the backend.
         const inputFormData = await request.formData()
         const image = inputFormData.get("image")
 
