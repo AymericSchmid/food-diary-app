@@ -1,4 +1,4 @@
-import { getLogMealErrorMessage } from "@/components/logmeal/error"
+import { getLogMealErrorMessage } from "@/lib/logmeal/error"
 import { NextResponse } from "next/server"
 
 const LOGMEAL_CONFIRM_DISH_URL = "https://api.logmeal.com/v2/image/confirm/dish"

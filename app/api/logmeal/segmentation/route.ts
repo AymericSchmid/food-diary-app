@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getLogMealErrorMessage } from "@/components/logmeal/error"
+import { getLogMealErrorMessage } from "@/lib/logmeal/error"
 
 const LOGMEAL_SEGMENTATION_URL = "https://api.logmeal.com/v2/image/segmentation/complete"
 
