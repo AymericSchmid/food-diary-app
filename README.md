@@ -1,5 +1,7 @@
 # Food Diary App
 
+Live demo: https://food-diary-app-orpin.vercel.app
+
 ## Overview
 
 This project is a mobile-first AI-powered food diary app. Users can create an account, complete a basic nutrition profile, log meals either from a photo or manually, and review their daily energy intake in a diary view.
@@ -171,3 +173,9 @@ Then open:
 ```txt
 http://localhost:3000
 ```
+
+## Limitations
+
+For this prototype, the app uses a single server-side LogMeal API token. In a production deployment, this could be extended by mapping each application user to a dedicated LogMeal API user. This would allow better per-user quota management.
+
+Some features are intentionally simple, such as basic API error handling. Meal editing and deletion are not implemented, but could be added in the future.
