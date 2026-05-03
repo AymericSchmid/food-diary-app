@@ -12,7 +12,6 @@ type Props = {
     amount: string
     setAmount: (value: string) => void
     unit: UnitType
-    setUnit: (value: UnitType) => void
     filteredIngredients: Ingredient[]
     onSelectIngredient: (ingredient: Ingredient) => void
     onAddIngredient: () => void
@@ -27,7 +26,6 @@ export default function IngredientSearch({
     amount,
     setAmount,
     unit,
-    setUnit,
     filteredIngredients,
     onSelectIngredient,
     onAddIngredient,
@@ -74,32 +72,19 @@ export default function IngredientSearch({
                     <div className="space-y-2 col-span-2">
                         <Label htmlFor="amount">Amount</Label>
                         <Input
-                        id="amount"
-                        placeholder="100"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        type="number"
+                            id="amount"
+                            placeholder="100"
+                            value={amount}
+                            onChange={(e) => setAmount(Number(e.target.value).toFixed(0))}
+                            type="number"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Unit</Label>
-
-                        <Select
-                            value={unit}
-                            onValueChange={(value: UnitType) => setUnit(value)}
-                        >
-                        <SelectTrigger>
-                            <SelectValue />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem value="g">g</SelectItem>
-                            <SelectItem value="ml">ml</SelectItem>
-                            <SelectItem value="serving">serving</SelectItem>
-                            <SelectItem value="piece">piece</SelectItem>
-                        </SelectContent>
-                        </Select>
+                        <div className="flex h-10 items-center text-sm text-muted-foreground">
+                            {unit}
+                        </div>
                     </div>
 
                 </div>

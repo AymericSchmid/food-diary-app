@@ -68,7 +68,7 @@ export default function ManualMealForm() {
         setFilteredIngredients([])
         setIngredientName(ingredient.name)
 
-        setAmount(String(ingredient.avgQuantity))
+        setAmount(String(Number(ingredient.avgQuantity).toFixed(0)))
         setUnit(ingredient.unit)
     }
 
@@ -262,7 +262,6 @@ export default function ManualMealForm() {
                 amount={amount}
                 setAmount={setAmount}
                 unit={unit}
-                setUnit={setUnit}
                 filteredIngredients={filteredIngredients}
                 onSelectIngredient={handleSelectIngredient}
                 onAddIngredient={handleAddIngredient}
